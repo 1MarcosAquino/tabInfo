@@ -1,0 +1,45 @@
+:root {
+    --pink-color: #cc4f96;
+    --dark-color: #09090b;
+
+    --gray-color: #18181b;
+    --white-color: #f9f9f9;
+
+    --warning-color: #f3a916;
+    --error-color: #ff3012;
+    --success-color: #50ed51;
+    --info-color: #3f51b5;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button.success {
+    background-color: var(--success-color);
+    color: var(--white-color);
+}
+
+button.info {
+    background-color: var(--info-color);
+    color: var(--white-color);
+}
+
+button.warning {
+    background-color: var(--warning-color);
+    color: var(--dark-color);
+}
+
+button.error {
+    background-color: var(--error-color);
+    color: var(--white-color);
+}
+
+button.default {
+    background-color: var(--gray-color);
+    color: var(--white-color);
+}
