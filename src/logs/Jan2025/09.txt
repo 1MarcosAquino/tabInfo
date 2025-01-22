@@ -1,0 +1,4 @@
+[22/Jan/2025-09:28] = created
+[22/Jan/2025-09:28] =>  {"sql":"UPDATE products SET id = :newContact WHERE id = :oldContact","params":{":oldContact":"5",":newContact":"143"}}
+[22/Jan/2025-09:29] =>  {"sql":"UPDATE products SET id = :newContact, name = :name WHERE id = :oldContact","params":{":oldContact":"19",":newContact":"451",":name":"Product1"}}
+[22/Jan/2025-09:29] =>  {"sql":"UPDATE products SET id = :newContact WHERE id = :oldContact","params":{":oldContact":"7",":newContact":"2"}}

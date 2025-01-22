@@ -1,0 +1,70 @@
+<div class="from-container">
+    <div class="from-container-box">
+        <h2>Cadastrar Produto</h2>
+        <form>
+            <div class="form-group">
+                <label for="name">Nome</label>
+                <input type="text" id="name" name="name" placeholder="Nome" required />
+            </div>
+
+            <div class="form-group">
+                <label for="price">price</label>
+                <input type="price" id="price" name="price" placeholder="price" required />
+            </div>
+
+            <div class="form-group">
+                <label for="qtd">Quantidade</label>
+                <input type="text" id="qtd" name="qtd" placeholder="Quantidade" required />
+            </div>
+
+            <button class="button info" onclick="register()" type="button">Cadastrar</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    function register() {
+        var name = $('#name').val();
+        var price = $('#price').val();
+        var qtd = $('#qtd').val();
+        var isValid = true;
+
+        if (name === '') {
+            message('Por favor, insira o nome.', 'Campo invalido', 'error');
+            isValid = false;
+        }
+
+        if (price === '') {
+            message('Por favor, insira o price.', 'Campo invalido', 'error');
+            isValid = false;
+        }
+
+        if (qtd === '') {
+            message('Por favor, insira a Quantidade.', 'Campo invalido', 'error');
+            isValid = false;
+        }
+
+        if (isValid) {
+            $.ajax({
+                url: '/product/register_product.php',
+                type: 'POST',
+                data: JSON.stringify({
+                    name: name,
+                    price: price,
+                    image: 'foto do produto ' + name,
+                    qtd: qtd,
+                    user_id: 1,
+                }),
+                success: function (response) {
+                    message('Cadastro bem-sucedido!', 'PARABENS', 'success');
+
+                    console.log(response);
+                },
+                error: function (xhr, status, error) {
+                    console.log(xhr);
+                    message('Erro ao fazer cadastro', 'ALGO DEU ERRADO', 'error');
+                },
+            });
+        }
+    }
+</script>

@@ -1,0 +1,93 @@
+<div class="user-container"></div>
+
+<script>
+    const usersList = [];
+    function renderUsers({ result: users }) {
+        let htmlContent = '';
+        for (const user of users) {
+            usersList.push(user);
+            htmlContent += `<div class="card">
+                                <svg width="200" height="150" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="100%" height="100%" fill="lightgrey" />
+                                    <text x="50%" y="50%" font-size="20" text-anchor="middle" fill="black"> FOTO DO USUARIO ${user.id} </text>
+                                </svg>
+                                <h2>${user.name}</h2>
+                                <p>Contato: ${user.contact}</p>
+                    <button onclick="editUser('${user.contact}')" class="button warning">Editar</button>
+                    <button onclick="removeUser('${user.contact}')" class="button error">Remover</button>
+                            </div>`;
+        }
+
+        $('.user-container').html(htmlContent);
+    }
+
+    Api(urlBase + 'user/list_users.php', renderUsers);
+
+    async function editUser(contact) {
+        console.log(usersList.length);
+
+        const [user] = usersList.filter((u) => u.contact === contact);
+
+        const { value: formValues } = await Swal.fire({
+            title: 'Multiple inputs',
+            html: `
+        <input id="swal-input1" value="${user.name}" class="swal2-input">
+        <input id="swal-input2" value="${user.contact}" class="swal2-input">
+        <input id="swal-input3" placeholder="Senha" class="swal2-input">
+      `,
+            focusConfirm: false,
+            preConfirm: () => {
+                return {
+                    name: $('#swal-input1').val().trim(),
+                    contact: $('#swal-input2').val().trim(),
+                    pass: $('#swal-input3').val().trim(),
+                };
+            },
+        });
+        if (formValues) {
+            $.ajax({
+                url: `${urlBase}user/update_user.php?contact=${contact}`,
+                type: 'POST',
+                data: JSON.stringify(formValues),
+                success: function (result) {
+                    usersList.length = 0;
+                    Api(urlBase + 'user/list_users.php', renderUsers);
+                    message('', 'Atualizado!', 'success');
+                    console.log(result?.responseJSON);
+                },
+                error: function (e) {
+                    console.log(e);
+                    message(e.responseText, e.responseText);
+                },
+            });
+        }
+    }
+    function removeUser(contact) {
+        console.log(`${urlBase}user/delete_user.php?contact=${contact}`);
+        Swal.fire({
+            title: 'Clique para Confirmar.',
+            // text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Deletar!',
+            cancelButtonText: 'Cancelar',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: `${urlBase}user/delete_user.php?contact=${contact}`,
+                    type: 'DELETE',
+                    success: function (result) {
+                        Api(urlBase + 'user/list_users.php', renderUsers);
+                        message('', 'Deletado!', 'success');
+                    },
+                    error: function (e) {
+                        console.log(e);
+                        message(e.responseText, 'Algo deu errado!');
+                    },
+                });
+            }
+        });
+    }
+</script>

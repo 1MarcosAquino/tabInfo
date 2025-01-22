@@ -1,0 +1,6 @@
+[22/Jan/2025-08:02] = created
+[22/Jan/2025-08:02] =>  {"sql":"UPDATE users SET contact = :newContact, name = :name WHERE contact = :oldContact","params":{":oldContact":"arqes@mail.com",":newContact":"aarqes@mail.com",":name":"WHER"}}
+[22/Jan/2025-08:18] =>  {"sql":"UPDATE users SET name = :name WHERE contact = :oldContact","params":{":oldContact":"aare@mail.com",":name":"mistera"}}
+[22/Jan/2025-08:18] =>  {"sql":"UPDATE users SET contact = :newContact WHERE contact = :oldContact","params":{":oldContact":"aare@mail.com",":newContact":"mistera@mail.com"}}
+[22/Jan/2025-08:19] =>  {"sql":"UPDATE users SET contact = :newContact WHERE contact = :oldContact","params":{":oldContact":"1aA@kkkkk",":newContact":"mcz@mail.com"}}
+[22/Jan/2025-08:28] =>  {"sql":"UPDATE users SET contact = :newContact, name = :name WHERE contact = :oldContact","params":{":oldContact":"1aA@haha.com",":newContact":"1aA@MARCOSO.com",":name":"MARCOSO"}}

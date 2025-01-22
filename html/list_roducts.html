@@ -1,0 +1,105 @@
+<style>
+    .products-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+
+        width: 100%;
+    }
+</style>
+
+<div class="products-container"></div>
+
+<script>
+    const productsList = [];
+
+    function renderProduct({ result: productList }) {
+        let htmlContent = '';
+        for (const product of productList) {
+            productsList.push(product);
+            htmlContent += `
+            <div class="card"> 
+                    <svg width="200" height="150" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="100%" height="100%" fill="lightgrey" />
+                        <text x="50%" y="50%" font-size="20" text-anchor="middle" fill="black"> ${product.image} </text>
+                    </svg>
+                    <h2>${product.name}</h2> 
+                    <p>Quantidade: ${product.qtd}</p> 
+                    <p class="price">R$ ${product.price}</p> 
+                <button onclick="editProduct(${product.id})" class="button warning">Editar</button>
+                <button onclick="removeProduct(${product.id})" class="button error">Remover</button>
+            </div>`;
+        }
+
+        $('.products-container').html(htmlContent);
+    }
+
+    async function editProduct(id) {
+        const [product] = productsList.filter((p) => p.id === id);
+
+        const { value: formValues } = await Swal.fire({
+            title: 'Atualizar Produto',
+            html: `
+        <input id="swal-input1" value="${product.name}" class="swal2-input">
+        <input id="swal-input2" value="${product.price}" class="swal2-input">
+        <input id="swal-input3" value="${product.qtd}" class="swal2-input">
+      `,
+            focusConfirm: false,
+            preConfirm: () => {
+                return {
+                    name: $('#swal-input1').val().trim(),
+                    id: $('#swal-input2').val().trim(),
+                    pass: $('#swal-input3').val().trim(),
+                };
+            },
+        });
+        if (formValues) {
+            $.ajax({
+                url: `${urlBase}product/update_product.php?id=${id}`,
+                type: 'POST',
+                data: JSON.stringify(formValues),
+                success: function (result) {
+                    productsList.length = 0;
+
+                    Api(urlBase + 'product/list_product.php', renderProduct);
+
+                    message('', 'Atualizado!', 'success');
+                },
+                error: function (e) {
+                    message(e.responseText, e.responseText);
+                },
+            });
+        }
+    }
+
+    function removeProduct(id) {
+        // console.log(`${urlBase}product/delete_product.php?id=${id}`);
+        Swal.fire({
+            title: 'Clique para Confirmar.',
+            // text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Deletar!',
+            cancelButtonText: 'Cancelar',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: `${urlBase}product/delete_product.php?id=${id}`,
+                    type: 'DELETE',
+                    success: function (result) {
+                        Api(urlBase + 'product/list_product.php', renderProduct);
+                        message('', 'Deletado!', 'success');
+                    },
+                    error: function (e) {
+                        console.log(e);
+                        message(e.responseText, 'Algo deu errado!');
+                    },
+                });
+            }
+        });
+    }
+
+    Api(urlBase + 'product/list_product.php', renderProduct);
+</script>

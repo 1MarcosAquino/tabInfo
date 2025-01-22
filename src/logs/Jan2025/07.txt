@@ -1,0 +1,18 @@
+[22/Jan/2025-07:03] = created
+[22/Jan/2025-07:03] =>  {"name":"Marcos","contact":"1aA@mail.com","pass":""}
+[22/Jan/2025-07:05] =>  {"name":"Marcos","contact":"mcz@mail.com","pass":""}
+[22/Jan/2025-07:07] =>  {"name":"Marcos","contact":"1aA@kkkkk","pass":""}
+[22/Jan/2025-07:37] =>  
+
+{"sql":"UPDATE users SET contact = :newContact, name = :name WHERE contact = :oldContact","params":{":oldContact":"marcos@mail.com",":newContact":"marcos@mail.com",":name":"Marcos"}}
+[22/Jan/2025-07:39] =>  {"sql":"UPDATE users SET contact = :newContact, name = :name WHERE contact = :oldContact","params":{":oldContact":"marcos@mail.com",":newContact":"marcos@mail.com",":name":"Marcos"}}
+[22/Jan/2025-07:40] =>  {"sql":"UPDATE users SET contact = :newContact, name = :name WHERE contact = :oldContact","params":{":oldContact":"arqes@mail.com",":newContact":"arqes@mail.com",":name":"WHER"}}
+[22/Jan/2025-07:40] =>  {"sql":"UPDATE users SET contact = :newContact, name = :name WHERE contact = :oldContact","params":{":oldContact":"marcos@mail.com",":newContact":"marcos@mail.com",":name":"Marcos"}}
+[22/Jan/2025-07:40] =>  {"sql":"UPDATE users SET contact = :newContact, name = :name WHERE contact = :oldContact","params":{":oldContact":"marcos@mail.com",":newContact":"marcos@mail.com",":name":"Marcos"}}
+[22/Jan/2025-07:41] =>  {"sql":"UPDATE users SET contact = :newContact, name = :name WHERE contact = :oldContact","params":{":oldContact":"marcos@mail.com",":newContact":"marcos@mail.com",":name":"Marcos"}}
+[22/Jan/2025-07:41] =>  {"sql":"UPDATE users SET contact = :newContact, name = :name WHERE contact = :oldContact","params":{":oldContact":"marcos@mail.com",":newContact":"marcos@mail.com",":name":"Marcos"}}
+[22/Jan/2025-07:52] =>  {"sql":"UPDATE users SET contact = :newContact, name = :name WHERE contact = :oldContact","params":{":oldContact":"arqes@mail.com",":newContact":"as@mail.com",":name":"WHER"}}
+[22/Jan/2025-07:52] =>  {"sql":"UPDATE users SET contact = :newContact, name = :name WHERE contact = :oldContact","params":{":oldContact":"1aA@kkkkk.com",":newContact":"1aA@g.com",":name":"MARCOS"}}
+[22/Jan/2025-07:56] =>  {"sql":"UPDATE users SET contact = :newContact, name = :name WHERE contact = :oldContact","params":{":oldContact":"1aA@kkkkk",":newContact":"1aA@aqui.com",":name":"Marcos"}}
+[22/Jan/2025-07:57] =>  {"sql":"UPDATE users SET name = :name WHERE contact = :oldContact","params":{":oldContact":"1aA@kkkkk",":name":"Marcos"}}
+[22/Jan/2025-07:58] =>  {"sql":"UPDATE users SET name = :name WHERE contact = :oldContact","params":{":oldContact":"marcos@mail.com",":name":"Marcos"}}
